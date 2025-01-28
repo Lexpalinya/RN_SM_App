@@ -1,19 +1,14 @@
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
-import { NavigationContainerProps, NavigationProp, useNavigation } from '@react-navigation/native';
-import { RootStackParamList } from '../../routes/RootNavigationStack';
-import CustomButton from '../../utils/components/CustomButton';
-
+import {NavigationProp, useNavigation} from '@react-navigation/native';
+import {RootStackParamList} from '../../routes/RootNavigationStack';
+import CompanyScreen from './Company/CompanyScreen';
+import JobberScree from './Jobber/JobberScree';
+const role: string = 'company';
 const ProfileScreen = () => {
-  const navigation=useNavigation<NavigationProp<RootStackParamList>>()
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
   return (
-    <View style={styles.stlyesView}>
-      <Text>ProfileScreen</Text>
-     <CustomButton title='LogOut'onPress={()=>navigation.reset({
-      index:0,
-      routes:[{name:"Login"}]
-     })}/>
-    </View>
+    <View>{role === 'company' ? <CompanyScreen /> : <JobberScree />}</View>
   );
 };
 

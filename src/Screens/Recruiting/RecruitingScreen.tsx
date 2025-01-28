@@ -12,8 +12,8 @@ const TopTab = createMaterialTopTabNavigator();
 interface TopTabListProps {
   title: string;
   component: React.FC<Element>;
-  // props: any;
 }
+
 const TopTabList: TopTabListProps[] = [
   {title: 'ປະກາດຫາພະນັກງານ', component: PostsTab},
   {title: 'ບໍລິສັດ', component: CompanyTab},
