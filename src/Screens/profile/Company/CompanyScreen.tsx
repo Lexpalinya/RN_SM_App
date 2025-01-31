@@ -1,88 +1,103 @@
-import {ScrollView, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
+import {
+  Dimensions,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import CustomImage from '../../../utils/components/CustomImage';
 import color from '../../../constants/color';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
+import PostTab from './Tab/PostTab';
+import {
+  FaListAlt,
+  IconParkSolidAddWeb,
+  LsiconSettingOutline,
+} from '../../../../assets/Icon';
+import {SvgProps} from 'react-native-svg';
+import Setting from './Tab/Settings/Setting';
 
-import CompanyTab from '../../Recruiting/Company/CompanyTab';
-import PostsTab from '../../Recruiting/Post/PostsTab';
 const theme = 'light';
-const TopTab = createMaterialTopTabNavigator();
-interface TopTabListProps {
-  title: string;
-  component: React.FC<Element>;
-}
+const Tab = createMaterialTopTabNavigator();
 
-const TopTabList: TopTabListProps[] = [
-  {title: 'ປະກາດຫາພະນັກງານ', component: CompanyTab},
-  {title: 'ບໍລິສັດ', component: PostsTab},
+const TabArr = [
+  {
+    name: 'post',
+    component: PostTab,
+    icon: FaListAlt,
+  },
+  // {
+  //   name: 'about',
+  //   component: PostTab,
+  //   icon: FluentBuildingHome24Regular,
+  // },
+  {
+    name: 'setting',
+    component: Setting,
+    icon: LsiconSettingOutline,
+  },
 ];
-const tests = () => {
-  return <Text>sfsdfsfd</Text>;
-};
-const CompanyScreen = () => {
-  return (
-    <ScrollView style={{}}>
-      <View style={styles.container}>
-        <CustomImage
-          style={styles.backgroundimage}
-          source={{
-            uri: 'https://gratisography.com/wp-content/uploads/2024/10/gratisography-cool-cat-800x525.jpg',
-          }}
-          height={150}
-          borderRadius={0}
-          resizeMode="cover"
-          showFull={true}
-        />
 
+const CompanyScreen: React.FC = () => {
+  return (
+    <View style={styles.container}>
+      <View style={styles.header}>
         <CustomImage
           source={{
             uri: 'https://gratisography.com/wp-content/uploads/2024/10/gratisography-cool-cat-800x525.jpg',
           }}
-          resizeMode="cover"
-          showFull={false}
+          style={styles.backgroundImage}
+        />
+        <CustomImage
+          source={{
+            uri: 'https://gratisography.com/wp-content/uploads/2024/10/gratisography-cool-cat-800x525.jpg',
+          }}
           style={styles.profile}
         />
-
-        <View style={styles.subTitleContainer}>
-          <Text style={styles.title} numberOfLines={1}>
-            Sesavant company
-          </Text>
-          <Text style={{paddingBottom: 4}} numberOfLines={1}>
-            Julia Pouros Julia Pouros Julia PourosJulia Pouros
-          </Text>
-          <Text style={styles.address} numberOfLines={1}>
-            ນະຄອນຫຼວງວຽງຈັນ, ຈັນທະບູລີ, ດອນແດງ
-          </Text>
+        <View style={styles.titleContainer}>
+          <Text style={styles.title}>ບໍລິສັດສຸວັນນີ.</Text>
+          <Text style={styles.businessType}>ວັດສະດຸກໍ່ສ້າງ</Text>
+          <Text style={styles.address}>ນະຄອນຫຼວງວຽງຈັນ, ຈັນທະບູລີ, ໂພນຕອງ</Text>
         </View>
       </View>
-      <TopTab.Navigator
+      <TouchableOpacity
+        style={{
+          position: 'absolute',
+          zIndex: 1,
+          bottom: 15,
+          right: 15,
+          backgroundColor: color.light.primary,
+          padding: 12,
+          borderRadius: 50,
+        }}>
+        <IconParkSolidAddWeb width={30} height={30} color={'#ffff'} />
+      </TouchableOpacity>
+      <Tab.Navigator
         screenOptions={{
           tabBarIndicatorStyle: {
             backgroundColor: color[theme].primary,
             height: 2,
           },
         }}>
-        {TopTabList.map((item, index) => {
+        {TabArr.map(item => {
+          const Icon: React.ComponentType<SvgProps> = item.icon;
           return (
-            <TopTab.Screen
-              key={index}
-              name={item.title}
+            <Tab.Screen
+              key={item.name}
+              name={item.name}
               component={item.component}
               options={{
-                tabBarLabel: ({focused}) => {
-                  return (
-                    <Text style={[styles.titleTap, focused && styles.titleFocusTap]}>
-                      {item.title}
-                    </Text>
-                  );
+                tabBarShowLabel: false,
+                tabBarIcon: ({focused, color}) => {
+                  return <Icon width={24} height={30} color={'black'} />;
                 },
               }}
             />
           );
         })}
-      </TopTab.Navigator>
-    </ScrollView>
+      </Tab.Navigator>
+    </View>
   );
 };
 
@@ -90,58 +105,42 @@ export default CompanyScreen;
 
 const styles = StyleSheet.create({
   container: {
-    height: 300,
+    backgroundColor: color[theme].backgroundHomePage,
+    width: '100%',
+    height: '100%',
+  },
+  header: {
     backgroundColor: color[theme].backgroundPage,
   },
-  backgroundimage: {
+  backgroundImage: {
     width: '100%',
     height: 130,
+    borderRadius: 0,
   },
   profile: {
-    borderRadius: 100,
-    width: 130,
-    height: 130,
-    marginHorizontal: '50%',
     position: 'absolute',
-    top: -70,
+    top: -75,
     left: -60,
+    width: 120,
+    height: 120,
+    marginHorizontal: '50%',
+    borderRadius: 100,
+    borderWidth: 4,
     borderColor: color[theme].backgroundPage,
-    borderWidth: 5,
-    elevation: 4,
+    elevation: 5,
   },
   titleContainer: {
-    flexDirection: 'row',
+    marginTop: 45,
     alignItems: 'center',
-    flex: 1,
-    backgroundColor: 'red',
-    height: 100,
-  },
-  subTitleContainer: {
-    flex: 1,
-    alignItems: 'center',
-    marginTop: 50,
   },
   title: {
-    fontWeight: 'bold',
-    fontSize: 30,
-    marginVertical: 8,
-  },
-  textContainer: {
-    flex: 1,
-    marginHorizontal: 20,
-  },
-  address: {
-    fontSize: 14,
-    color: '#555',
-  },
-  titleTap: {
-    fontSize: 14,
-    color: color[theme].textPrimary,
+    fontSize: 26,
     fontWeight: 'bold',
   },
-  titleFocusTap: {
+  businessType: {
+    marginVertical: 2,
     fontSize: 16,
-    color: color[theme].primary,
-    fontWeight: 'bold',
+    fontWeight: 500,
   },
+  address: {},
 });

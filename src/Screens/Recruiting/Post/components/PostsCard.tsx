@@ -10,7 +10,7 @@ import React from 'react';
 import color from '../../../../constants/color';
 import CustomImage from '../../../../utils/components/CustomImage';
 import CustomButton from '../../../../utils/components/CustomButton';
-import {TablerHome} from '../../../../../assets/Icon';
+import {IconamoonEdit, TablerHome} from '../../../../../assets/Icon';
 
 const theme = 'light';
 const defaultImage =
@@ -78,7 +78,7 @@ const JobPostionDetail: React.FC<{item: PostTabProps}> = ({item}) => {
     </View>
   );
 };
-const PostsCard = () => {
+const PostsCard: React.FC<{showButton?: boolean}> = ({showButton = true}) => {
   return (
     <TouchableOpacity onPress={() => {}}>
       <View style={styles.itemContainer}>
@@ -99,22 +99,28 @@ const PostsCard = () => {
               ນະຄອນຫຼວງວຽງຈັນ, ຈັນທະບູລີ, ດອນແດງ
             </Text>
           </View>
-          <View
-            style={{
-              alignItems: 'flex-end',
-              justifyContent: 'space-between',
-              height: '90%',
-            }}>
+          {showButton ? (
+            <View
+              style={{
+                alignItems: 'flex-end',
+                justifyContent: 'space-between',
+                height: '90%',
+              }}>
+              <TouchableOpacity style={{marginBottom: 10}}>
+                <TablerHome />
+              </TouchableOpacity>
+              <CustomButton
+                style={styles.button}
+                textStyle={styles.textButton}
+                onPress={() => {}}
+                title="ຕິດຕາມ"
+              />
+            </View>
+          ) : (
             <TouchableOpacity style={{marginBottom: 10}}>
-              <TablerHome />
+              <IconamoonEdit />
             </TouchableOpacity>
-            <CustomButton
-              style={styles.button}
-              textStyle={styles.textButton}
-              onPress={() => {}}
-              title="ຕິດຕາມ"
-            />
-          </View>
+          )}
         </View>
         <View style={[styles.textSpaceBetween, styles.bottomLine]}>
           <Text style={{paddingHorizontal: 10}}>ຕຳແໜ່ງທີ່ຕ້ອງການ</Text>
@@ -130,11 +136,16 @@ const PostsCard = () => {
           style={[
             styles.textSpaceBetween,
             styles.topLine,
-            {alignItems: 'center'},
+            {alignContent: 'center', paddingTop: 10, paddingBottom: 8},
           ]}>
           <View
             style={[
-              {flexDirection: 'row', paddingLeft: 10, alignItems: 'center',marginBottom:15},
+              {
+                flexDirection: 'row',
+                paddingLeft: 10,
+                alignItems: 'center',
+                marginBottom: 10,
+              },
             ]}>
             <View
               style={[
@@ -157,7 +168,7 @@ const PostsCard = () => {
             </View>
             <Text style={[styles.salaryText, {marginLeft: 10}]}>ກີບ</Text>
           </View>
-          <TouchableOpacity>
+          <TouchableOpacity style={{alignItems: 'center'}}>
             <Text style={[styles.salaryText, {marginHorizontal: 10}]}>
               ສະແດງເພີ່ມ
             </Text>
@@ -174,7 +185,7 @@ const styles = StyleSheet.create({
   itemContainer: {
     backgroundColor: color[theme].backgroundPage,
     paddingHorizontal: 15,
-    paddingVertical: 10,
+    paddingVertical: 0,
     marginHorizontal: 8,
     marginVertical: 5,
     borderRadius: 8,

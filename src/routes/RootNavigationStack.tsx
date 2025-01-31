@@ -9,6 +9,8 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import RecruitingScreen from '../Screens/Recruiting/RecruitingScreen';
 import PersonInfoScreen from '../Screens/PersonInfo/PersonInfoScreen';
 import FavoriteScreen from '../Screens/Favorite/FavoriteScreen';
+import SettingScreen from '../Screens/Setting/SettingScreen';
+import KycScreen from '../Screens/profile/Company/Tab/Settings/kyc/KycScreen';
 
 export type RootStackParamList = {
   Login: undefined;
@@ -18,6 +20,8 @@ export type RootStackParamList = {
   Recruiting: undefined;
   PersonInfo: undefined;
   Favorite: undefined;
+  Setting: undefined;
+  Kyc: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -35,6 +39,8 @@ const RootNavigationStack = () => {
           <Stack.Screen name="Recruiting" component={RecruitingScreen} />
           <Stack.Screen name="PersonInfo" component={PersonInfoScreen} />
           <Stack.Screen name="Favorite" component={FavoriteScreen} />
+          <Stack.Screen name="Setting" component={SettingScreen}/>
+          <Stack.Screen name="Kyc" component={KycScreen}/>
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaView>

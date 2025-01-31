@@ -108,7 +108,8 @@ export default MainApp;
 const styles = StyleSheet.create({
   tabBarStyle: {
     borderTopColor: color[theme].containerBorder,
-    height: 65,
+    height: 75,
+    paddingBottom: 24,
   },
   container: {
     position: 'absolute',
